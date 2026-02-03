@@ -554,8 +554,14 @@ export class GameScene extends Phaser.Scene {
     const head = this.add.ellipse(0, 0, NOTE_HEAD_WIDTH, NOTE_HEAD_HEIGHT, COLORS.neonCyan, 1);
     head.setStrokeStyle(2, COLORS.white, 1);
 
-    const stemGlow = this.add.rectangle(11, -20, 6, 38, COLORS.neonCyan, 0.3);
-    const stem = this.add.rectangle(11, -20, 2, 36, COLORS.white, 1);
+    // Stem direction: B4 (MIDI 71) is the middle line
+    // Below B4: stem UP (right side), On/Above B4: stem DOWN (left side)
+    const stemUp = noteMidi < 71;
+    const stemX = stemUp ? 10 : -10;
+    const stemY = stemUp ? -18 : 18;
+
+    const stemGlow = this.add.rectangle(stemX, stemY, 6, 38, COLORS.neonCyan, 0.3);
+    const stem = this.add.rectangle(stemX, stemY, 2, 36, COLORS.white, 1);
 
     const container = this.add.container(this.noteStartX, noteY, [trail, ledger, headGlow, head, stemGlow, stem]);
 
