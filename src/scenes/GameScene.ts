@@ -258,8 +258,12 @@ export class GameScene extends Phaser.Scene {
     this.staffLeft = width * 0.08;
     this.staffRight = width * 0.92;
     const staffAreaHeight = height * 0.25;
-    this.staffTop = height * 0.14;
     this.staffSpacing = staffAreaHeight / 4;
+    // Center the staff block between the HUD and keyboard for better balance
+    const hudBottom = 56;
+    const keyboardTop = this.keyboardY;
+    const staffBlockHeight = staffAreaHeight + this.staffSpacing * 2;
+    this.staffTop = hudBottom + (keyboardTop - hudBottom - staffBlockHeight) / 2 + this.staffSpacing * 0.7;
     this.staffBottom = this.staffTop + this.staffSpacing * 4;
 
     this.noteStartX = this.staffLeft + 70;
